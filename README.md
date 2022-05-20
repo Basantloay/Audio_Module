@@ -30,17 +30,36 @@ https://youtu.be/2S1dgHpqCdk
 
 >>>conda install -c conda-forge librosa
 
-4- Transformers
-
->>>conda install -c conda-forge transformers
->>>conda install -c conda-forge/label/cf202003 transformers
-
- Tensorflow
+4- Tensorflow
  
 https://www.youtube.com/watch?v=hHWkvEcDBO0
 
 
+5- Transformers
+
+>>>conda install -c conda-forge transformers
+>>>conda install -c conda-forge/label/cf202003 transformers
+
+6-Speech-Recognition
+
+>>>pip install SpeechRecognition
+
+7-Pyaudio
+https://stackoverflow.com/questions/61290821/error-command-errored-out-with-exit-status-1-while-installing-pyaudio
+
+>>>pip install PyAudio-0.2.11-cp310-cp310-win_amd64.whl
+
+8- GOOGLE APIs
+>>>pip install google-cloud-speech
+
+>>>set GOOGLE_APPLICATION_CREDENTIALS="D:\GP\affable-hall-343712-1c88437d51d8.json"
+
 ###Some commands 
 
 >>>pip install transformers --upgrade
+
 >>>pip install ipython
+
+>>>git rebase -i HEAD~3
+
+>>>git push origin --force
