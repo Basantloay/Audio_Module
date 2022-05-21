@@ -54,6 +54,19 @@ https://stackoverflow.com/questions/61290821/error-command-errored-out-with-exit
 
 >>>set GOOGLE_APPLICATION_CREDENTIALS="D:\GP\affable-hall-343712-1c88437d51d8.json"
 
+
+9- NLTK
+>>>>from nltk.corpus import reuters
+
+>>>>import nltk
+
+>>>>nltk.download('reuters')
+
+>>>>nltk.download('punkt')
+
+>>>>print(reuters.sents())
+
+
 ###Some commands 
 
 >>>pip install transformers --upgrade
