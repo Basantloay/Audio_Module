@@ -76,3 +76,6 @@ https://stackoverflow.com/questions/61290821/error-command-errored-out-with-exit
 >>>git rebase -i HEAD~3
 
 >>>git push origin --force
+
+>>>conda install -c anaconda pandas
+
