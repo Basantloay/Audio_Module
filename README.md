@@ -79,3 +79,11 @@ https://stackoverflow.com/questions/61290821/error-command-errored-out-with-exit
 
 >>>conda install -c anaconda pandas
 
+>>>pip install pytorch-pretrained-bert
+
+
+##Datasets
+
+1- CoLA - The Corpus of Linguistic Acceptability
+
+>https://nyu-mll.github.io/CoLA/cola_public_1.1.zip

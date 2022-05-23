@@ -5,8 +5,19 @@
         https://github.com/amilanpathirana/Grammar-Check-using-BERT
 """
 import torch
-from transformers import BertModel, BertConfig, BertTokenizer
+
+from transformers import BertModel, BertConfig, BertTokenizer,BertForSequenceClassification,
+import io
+import numpy as np
+import matplotlib.pyplot as plt
 import pandas as pd
+
+from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
+from keras.preprocessing.sequence import pad_sequences
+from sklearn.model_selection import train_test_split
+
+from tqdm import tqdm , trange
+
 
 
 def grammar_check_BERT(phrases):
