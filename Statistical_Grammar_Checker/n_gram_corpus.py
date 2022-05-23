@@ -6,7 +6,6 @@ from nltk import trigrams
 from collections import defaultdict
 import csv
 from datetime import datetime
-from json import JSONDecodeError
 
 
 class TrigramCorpus:
@@ -39,13 +38,13 @@ class TrigramCorpus:
 
         with open(prob_ngram, 'w', encoding='UTF8', newline='') as out:
             writer = csv.writer(out)
-            #writer.writerow(['Tuple[0]','Tuple[1]', 'Prior', 'Prob'])
+            # writer.writerow(['Tuple[0]','Tuple[1]', 'Prior', 'Prob'])
             # by dividing freq by total frequencies we get probability
             for i in self.probability_corpus:
                 summation = float(sum(self.probability_corpus[i].values()))
                 for w3 in self.probability_corpus[i]:
                     self.probability_corpus[i][w3] /= summation
-                    str1 = [i[0],i[1], w3, self.probability_corpus[i][w3]]
+                    str1 = [i[0], i[1], w3, self.probability_corpus[i][w3]]
                     # self.probability_corpus_array.append(str1)
                     # json.dump(str1, out)
                     # json.dump('\\n', out)
@@ -60,29 +59,26 @@ class TrigramCorpus:
         return self.probability_corpus[posterior_tuple][likelihood]
 
     def read_corpus_from_file(self):
-
+        print('Loading probability of trigram corpus from CSV')
         prob_ngram = os.path.join(os.path.dirname(__file__), "prob_ngram.csv")
 
         try:
 
             with open(prob_ngram, encoding="utf8") as reading:
                 df = csv.reader(reading)
-                count=0
-
-
-
+                count = 0
 
                 for i in df:
                     count += 1
                     for j in range(2):
-                        if i[j]=='':
-                            i[j]=None
-                    print(i)
-                    self.probability_corpus[(i[0],i[1])][i[2]] = float(i[3])
+                        if i[j] == '':
+                            i[j] = None
+                    # print(i)
+                    self.probability_corpus[(i[0], i[1])][i[2]] = float(i[3])
                 if count < 2:
                     print('Probability Corpus is EMPTY !!!')
                     return False
-                #print(self.probability_corpus)
+                # print(self.probability_corpus)
                 return True
 
         except IOError:
@@ -95,4 +91,4 @@ if __name__ == "__main__":
     tc = TrigramCorpus()
 
     print('Total Time Taken To Generate Probability corpus in seconds: ', (datetime.now() - t1).total_seconds())
-    print(tc.extract_probability("CC", (None, None))) #0.026758787081208532
+    print(tc.extract_probability("CC", (None, None)))  # 0.026758787081208532

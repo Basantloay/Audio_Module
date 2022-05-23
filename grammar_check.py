@@ -4,10 +4,10 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 def grammar_check(phrases):
     # Load the tokenizer
-    tokenizer = AutoTokenizer.from_pretrained("prithivida/grammar_error_correcter_v1")
+    tokenizer = AutoTokenizer.from_pretrained("prithivida/grammar_error_correcter_v1",use_auth_token=True)
 
     # Load the model
-    model = AutoModelForSeq2SeqLM.from_pretrained("prithivida/grammar_error_correcter_v1")
+    model = AutoModelForSeq2SeqLM.from_pretrained("prithivida/grammar_error_correcter_v1",use_auth_token=True)
 
     # save model
     # model.save('./')
