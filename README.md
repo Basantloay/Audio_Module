@@ -66,6 +66,8 @@ https://stackoverflow.com/questions/61290821/error-command-errored-out-with-exit
 
 >>>>print(reuters.sents())
 
+10- Google Bucket
+>>>>pip install google-cloud-storage
 
 ###Some commands 
 
@@ -81,9 +83,21 @@ https://stackoverflow.com/questions/61290821/error-command-errored-out-with-exit
 
 >>>pip install pytorch-pretrained-bert
 
+>>>pip install --ignore-installed --upgrade TensorFlow
 
-##Datasets
+### Datasets
 
-1- CoLA - The Corpus of Linguistic Acceptability
+1- CoLA The Corpus of Linguistic Acceptability
 
->https://nyu-mll.github.io/CoLA/cola_public_1.1.zip
+> https://nyu-mll.github.io/CoLA/cola_public_1.1.zip
+> https://nyu-mll.github.io/CoLA/
+
+2- CoNLL-2014 Official Test Data
+
+> https://www.comp.nus.edu.sg/~nlp/conll14st.html
+
+3- KELM Corpus
+
+> https://aclanthology.org/2021.naacl-main.278/
+> https://github.com/google-research-datasets/KELM-corpus
+
