@@ -16,7 +16,14 @@ import hashlib
 import hmac
 import time
 import uuid
-
+from datetime import datetime
+import requests
+from speech_recognition import AudioData, RequestError, UnknownValueError
+import moviepy.editor
+import speech_recognition as sr
+import os
+from google.cloud import storage
+from google.cloud import speech
 from speech_recognition import AudioData, RequestError, UnknownValueError
 import moviepy.editor
 import speech_recognition as sr
@@ -92,9 +99,9 @@ def recognize_google_cloud( audio_data, credentials_json=None, language="en-US",
     if show_all: return response
     if len(response.results) == 0: raise UnknownValueError()
 
-    transcript = ''
+    transcript = []
     for result in response.results:
-        transcript += result.alternatives[0].transcript.strip() + ' '
+        transcript.append(result.alternatives[0].transcript.strip())
     return transcript
 def video_to_audio_converter(video_name):
     # video = askopenfilename()
@@ -122,7 +129,7 @@ def speech_to_text_converter(file_name):
 
         try:
             output_text = recognize_google_cloud(audio)
-            # print(transcription)
+            print(output_text)
             print("Done EL7MDULLAAAH \n ")
 
 
@@ -130,9 +137,45 @@ def speech_to_text_converter(file_name):
             print("Error :  " + str(e))
 
         # write transcription
-        with open(file_name + '_transcription.txt', "w") as f:
-            f.write(output_text)
+        #with open(file_name + '_transcription.txt', "w") as f:
+        #    f.write(output_text)
 
+def upload_blob_from_stream(bucket_name='pgraderbucket11', filepath=None, destination_blob_name="audiofile"):
+    storage.blob._DEFAULT_CHUNKSIZE = 5 * 1024 * 1024  # 100 MB
+    storage.blob._MAX_MULTIPART_SIZE = 5 * 1024 * 1024  # 100 MB
+    storage_client = storage.Client()
 
+    bucket = storage_client.bucket(filepath)
+    blob = bucket.blob(destination_blob_name)
+
+    # Rewind the stream to the beginning. This step can be omitted if the input
+    # stream will always be at a correct position.
+
+    # Upload data from the stream to your bucket.
+    blob.upload(filepath)
+
+    print(
+        f"Stream data uploaded to {destination_blob_name} in bucket {bucket_name}."
+    )
+
+def create_bucket_class_location(bucket_name):
+    """
+    Create a new bucket in the US region with the coldline storage
+    class
+    """
+    # bucket_name = "your-new-bucket-name"
+
+    storage_client = storage.Client()
+
+    bucket = storage_client.bucket(bucket_name)
+    bucket.storage_class = "COLDLINE"
+    new_bucket = storage_client.create_bucket(bucket, location="us")
+
+    print(
+        "Created bucket {} in {} with storage class {}".format(
+            new_bucket.name, new_bucket.location, new_bucket.storage_class
+        )
+    )
+    return new_bucket
 if __name__ == "__main__":
     speech_to_text_converter(file_name='video1_Trim')

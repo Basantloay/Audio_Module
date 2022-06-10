@@ -57,8 +57,7 @@ def recognize_google_version(audio_data, key=None, language="en-US", pfilter=0, 
         "client": "chromium",
         "key": key,
         "lang": "en-US",
-        "pFilter": pfilter,
-        "enableAutomaticPunctuation": true
+        "pFilter": pfilter
 
     }))
 
@@ -78,6 +77,7 @@ def recognize_google_version(audio_data, key=None, language="en-US", pfilter=0, 
     # ignore any blank blocks
     actual_result = []
     for line in response_text.split("\n"):
+        print(line)
         if not line: continue
         result = json.loads(line)["result"]
         if len(result) != 0:
