@@ -81,7 +81,7 @@ def upload_to_cloud(file_path):
     return "gs://pgraderbucket11/{}".format(file_name)
 
 
-def speech_to_text_converter(file_name):
+def speech_to_text_converter(file_name,flag):
     requests.get('http://google.com', timeout=(10, 2000))
     audio_name = video_to_audio_converter(file_name)
 
@@ -103,11 +103,14 @@ def speech_to_text_converter(file_name):
     print(audio_path)
     # upload_blob_from_stream('pgraderbucket11',audio_path,audio_name)
     t1 = datetime.now()
-    upload_to_cloud(audio_path)
-    print('Uploaded on Cloud Bucket')
+    if flag==0:
+        upload_to_cloud(audio_path)
+        print('Uploaded on Cloud Bucket')
     # recognize speech using google
     t2 = datetime.now()
-    print('Total Time Taken to upload wav file on bucket in seconds : ', (t2 - t1).total_seconds())
+    if flag==0:
+
+        print('Total Time Taken to upload wav file on bucket in seconds : ', (t2 - t1).total_seconds())
     output_text = recognize_google_cloud(GCS_URI + '/' + audio_name)
     # print(transcription)
     # print("Done EL7MDULLAAAH \n ")
@@ -117,7 +120,8 @@ def speech_to_text_converter(file_name):
 
     # write transcription
     with open(file_name + '_transcription.txt', "w") as f:
-        f.write(output_text)
+        f.write(output_text[0])
+    return output_text
 
 
 if __name__ == "__main__":

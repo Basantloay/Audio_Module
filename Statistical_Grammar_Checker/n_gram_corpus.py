@@ -41,7 +41,10 @@ class TrigramCorpus:
             sents = df.sentence.values
         #print(sents)
         for i in sents:
-            sent=i.split()
+            if used_training_dataset==1:
+                sent=i
+            else:
+                sent=i.split()
             sent = [x.lower() for x in sent]
             # print(sent)
             # print(tags_list)
@@ -112,8 +115,12 @@ class TrigramCorpus:
             df = pd.read_csv("../cola_public/raw/in_domain_train.tsv", delimiter='\t', header=None,
                              names=['sentence_source', 'label', 'label_notes', 'sentence'])
             sents = df.sentence.values
-        for sent in sents:
-            tags = pos_tag(sent.split())
+        for i in sents:
+            if used_training_dataset==1:
+                sent=i
+            else:
+                sent=i.split()
+            tags = pos_tag(sent)
             y = 1
             tags_list = [x[y] for x in tags]
             # print(tags_list)

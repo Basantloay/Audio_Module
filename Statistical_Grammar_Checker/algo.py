@@ -1,5 +1,5 @@
 import nltk
-from n_gram_corpus import TrigramCorpus
+
 from nltk import trigrams
 
 
@@ -7,7 +7,8 @@ def grammar_checking(sentences,tc):
     # Tokenization and remove capital characters
     # tag each word in sentence using NLTK
     words_array = []
-
+    count=1
+    print(len(sentences))
     for sentence in sentences:
 
         prob_multiplication = 1.0
@@ -16,11 +17,10 @@ def grammar_checking(sentences,tc):
                 break
             prob_multiplication *= tc.extract_probability(w3, (w1, w2))
             print((w3, (w1, w2)), tc.extract_probability(w3, (w1, w2)))
-
+        count+=1
         words_array.append(prob_multiplication)
 
-    print(words_array)
-
+    return words_array,count
 
 def grammar_checking_tagged(sentences,tc):
     # Tokenization and remove capital characters
@@ -39,4 +39,4 @@ def grammar_checking_tagged(sentences,tc):
 
         words_array.append(prob_multiplication)
 
-    print(words_array)
+    return words_array
